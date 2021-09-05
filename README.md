@@ -1,4 +1,12 @@
 # Handwritten-Hindi-Word-Recognizer
+## MOSAIC (IIT BHU Electronics Engineering Society's Technical Fest's Event based on Image processing and Machine learning)
+### Problem Statement for Round 1 
+### Task 
+In today's ever-evolving & fast-paced world, we at Udyam 
+believe it is essential for us to stay in touch with our roots. Your 
+task is to implement a Handwritten Hindi Word Recognizer. 
+
+You can access the full problem statement pdf file and model.h5 file from [here](https://drive.google.com/drive/folders/1ckDfKecwtcjJuED1iMj-fW_XRfOchfT0?usp=sharing)
 
 There are three steps in recognition which are pre-processing, feature extraction and classification.
 We adopt the divide-and conquer policy wherein a major category is divided into sub-categories thus making the classification process simpler. 
@@ -39,3 +47,29 @@ Coming to header line removal part, we used two copies of the segmented word ima
 
                      word segmented image                                  header removed image
 <img src="images/4.png" width="400" >                                  <img src="images/5.png" width="400" >
+
+
+### Segmented images of characters
+
+<img src="images/seg_1.png" width="100">   <img src="images/seg_2.png" width="100">   <img src="images/seg_3.png" width="100">   <img src="images/seg_4.png" width="100">   <img src="images/seg_5.png" width="100">   <img src="images/seg_6.png" width="100">
+
+We stored the segmented character images and then we load our custom trained CNN model, which was trained over 21 different characters whose data we collected from UC Irvine machine learning dataset repository available on web, to classify these segmented character.
+
+For model preparation we were having 1700 images of each class with 300 separate images for testing purposes. We have also used data augmentation using ImageGenerator function from the keras library. We sized the image to (64,64) grayscale image. The sequential model we used was having 4 Conv2D layers with filters 32,64,128,256 respectively and 2 Maxpooling2D layers, each after 2 convolution layers followed by relu activation function with same padding. We also used 2 fully connected layers with relu activation and 1 fully connected layer with softmax activation. The loss function we used was Categorical_crossentropy with RMSProp optimizer.
+Because of this large dataset and the model architecture of 3 Million parameters, we obtained 97% accuracy on train data and 99% validation accuracy.
+
+Finally, we predicted the labels for the segmented characters and printed them as our final output of the entire model.
+
+<img src="images/6.png" width="400">
+
+### Features of the model 
+ - It can handle rotated word, angle < 80 degree
+ - It can work on blurry images 
+ - It can work on images with shadows and background noises
+ - The only necessary condition for model to work is slight space between characters
+ - Size of character set is 21 
+ - We avoid similar characters to improve model performance like –
+    [ख, ग, (झ, ड), (ञ, ज) (ट, ठ),(द, ढ), ण, (ध, घ), (ब, व, ष), (भ, म), ल, श, ह]
+ - The character set – 
+      [ क, घ, च, छ, ज, ठ, ड, त, थ, द, न, प, फ, म, य, र, व, स, क्ष, त्र, ज्ञ ]
+
