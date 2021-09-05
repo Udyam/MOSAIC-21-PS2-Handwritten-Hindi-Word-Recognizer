@@ -130,6 +130,7 @@ def predict(imagepath):
 
 
 if __name__ == "__main__":
+	## Update the filename and file location to check for more images
 		image_path = './prediction_test_images/p2.jpg'
 		answer = predict(image_path)
 		print(''.join(answer))
